@@ -63,7 +63,6 @@ def register(request):
         
         try:
             send_mail(subject, message, from_email, [email])
-            messages.success(request, f"Your OTP is: {otp_code}")
             return redirect('verify_otp') 
         except Exception as e:
             return render(request, 'registration.html', {'error': 'Email sending failed. Check settings.'})
