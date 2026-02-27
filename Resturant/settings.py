@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-kg(avgb4&!3#5$0=@++r2z4xg*1kbv)k0tgge4f955abdoha2j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://spice-house.up.railway.app']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://spice-house.up.railway.app',
