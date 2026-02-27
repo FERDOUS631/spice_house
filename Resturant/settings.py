@@ -185,3 +185,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.locmem.EmailBackend'
