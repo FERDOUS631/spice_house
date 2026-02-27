@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-kg(avgb4&!3#5$0=@++r2z4xg*1kbv)k0tgge4f955abdoha2j
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['spice-house.up.railway.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 CSRF_TRUSTED_ORIGINS = [
