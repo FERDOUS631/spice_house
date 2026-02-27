@@ -63,6 +63,7 @@ def register(request):
         
         try:
             send_mail(subject, message, from_email, [email])
+            
             return redirect('verify_otp') 
         except Exception as e:
             return render(request, 'registration.html', {'error': 'Email sending failed. Check settings.'})
@@ -141,7 +142,7 @@ def index(request):
     
     else:
 
-        return redirect('about')
+        return redirect('login')
 
 
 def user_logout(request):
@@ -149,7 +150,7 @@ def user_logout(request):
     return redirect('login')
 
 # menu view
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def menu(request):
     return render(request, 'menu.html')
 
@@ -188,7 +189,7 @@ def about(request):
         messages.success(request, 'Your message has been sent successfully!')
         return redirect('about')
     return render(request, 'about.html')
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def book_table(request):
     event_types = EventType.objects.all() 
     
@@ -322,6 +323,7 @@ def place_order(request):
             return redirect('checkout')
 
     return redirect('checkout')
+
 def order_success(request, order_id):
     try:
       
