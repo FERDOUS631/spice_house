@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About{% endblock %}
+{% block content %}
+<section class="about_section layout_padding">
+  <div class="container">
+    
+    <div class="row mb-5 align-items-center">
+      <div class="col-md-6 ">
+        <div class="img-box mb-4 mb-md-0">
+          <img src="{{ MEDIA_URL }}images/about-img.png" alt="">
+        </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="detail-box">
+          <div class="heading_container">
+            <h2 class="text-white">We Are <span style="color: #ffbe33;">Spice House</span></h2>
+          </div>
+          <p class="text-secondary mt-3">
+            At Spice House, we believe that food is not just sustenance, but an experience. Born from a passion for culinary excellence and a desire to share authentic flavors, our journey began with a simple idea: to create a space where every meal tells a story.
+            From our humble beginnings, we've grown, but our core values remain unchanged – quality ingredients, innovative recipes, and a warm, inviting atmosphere.
+          </p>
+          <a href="{% url 'story' %}" class="btn_custom">Discover Our Story</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5 pt-5 text-center text-white mission-vision-section">
+      <div class="col-12 mb-5">
+          <h2 class="heading_custom">Our <span style="color: #ffbe33;">Mission & Vision</span></h2>
+      </div>
+      <div class="col-md-6 mb-4 " data-aos="fade-right">
+        <div class="mission_card">
+          <i class="fa fa-bullseye fa-3x mb-3" style="color: #ffbe33;"></i>
+          <h4>Our Mission</h4>
+          <p class="text-muted">To delight our customers with an unparalleled dining experience, serving exquisite dishes crafted from the freshest ingredients, while fostering a community that celebrates food and togetherness.</p>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4 " data-aos="fade-left">
+        <div class="mission_card">
+          <i class="fa fa-eye fa-3x mb-3" style="color: #ffbe33;"></i>
+          <h4>Our Vision</h4>
+          <p class="text-muted">To be recognized as the leading culinary destination, renowned for our innovative cuisine, exceptional service, and our commitment to sustainable practices and community engagement.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5 pt-5 text-center text-white" data-aos="zoom-in">
+      <div class="col-12 mb-5">
+          <h2 class="heading_custom">Why Choose <span style="color: #ffbe33;">Spice House</span></h2>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature_card mission_card">
+          <i class="fa fa-truck fa-3x mb-3" style="color: #ffbe33;"></i>
+          <h4>Fast Delivery</h4>
+          <p class="text-muted">We deliver your food hot and fresh within 30 minutes. Your hunger doesn't have to wait.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature_card mission_card">
+          <i class="fa fa-leaf fa-3x mb-3" style="color: #ffbe33;"></i>
+          <h4>Fresh Ingredients</h4>
+          <p class="text-muted">We source everything from local organic farms to ensure the highest quality taste.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="feature_card mission_card">
+          <i class="fa fa-user-secret fa-3x mb-3" style="color: #ffbe33;"></i>
+          <h4>Expert Chefs</h4>
+          <p class="text-muted">Our chefs are internationally trained to bring you the best culinary experience.</p>
+        </div>
+      </div>
+    </div>
+
+<div class="row mt-5 pt-5 text-center text-white gallery-section" id="gallery-container">
+    <div class="col-12 mb-5">
+        <h2 class="heading_custom">Our <span style="color: #ffbe33;">Gallery</span></h2>
+        <p class="text-secondary">A glimpse into our vibrant atmosphere and delectable dishes.</p>
+    </div>
+    {% for item in gallery_images %}
+    <div class="col-md-4 col-sm-6 mb-4 gallery-card {% if forloop.counter > 6 %}hidden-item{% endif %}" 
+         data-aos="fade-right" 
+         data-aos-delay="{{ forloop.counter }}00">
+        
+        <div class="gallery-item rounded shadow" onclick="openLightbox('{{ item.image.url }}', '{{ item.title }}')">
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-fluid">
+            <div class="gallery-overlay">
+                <div class="overlay-text">
+                    <i class="fa fa-search-plus"></i>
+                    <h5>{{ item.title }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+
+    <div class="row mt-5 pt-5 text-center text-white">
+      <div class="col-12 mb-5">
+        <h2 class="heading_custom">Our Special <span style="color: #ffbe33;">Event Arrangements</span></h2>
+        <p class="text-secondary">Explore our professional planning for your grand celebrations.</p>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="flip-right">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-birthday-cake"></i></div>
+          <div class="event_detail">
+            <h5>Birthday Parties</h5>
+            <p>Celebrate your special day with custom decorations and signature cakes crafted by our master chefs.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="flip-up">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-briefcase"></i></div>
+          <div class="event_detail">
+            <h5>Corporate Meetings</h5>
+            <p>A quiet, professional setting for your business lunches, equipped with high-speed Wi-Fi and premium coffee.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="flip-left">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-heart"></i></div>
+          <div class="event_detail">
+            <h5>Anniversaries</h5>
+            <p>Make your milestones romantic with candle-lit tables, exclusive wine pairings, and a personalized menu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="flip-right">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-music"></i></div>
+          <div class="event_detail">
+            <h5>Live Music Nights</h5>
+            <p>Every weekend, elevate your mood with live jazz and acoustic sessions performing just for you.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4"  data-aos="flip-up">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-users"></i></div>
+          <div class="event_detail">
+            <h5>Friends Reunion</h5>
+            <p>Reconnect with old friends over group platters and comfortable seating designed for long conversations.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4" data-aos="flip-left">
+        <div class="event_card">
+          <div class="event_icon"><i class="fa fa-cutlery"></i></div>
+          <div class="event_detail">
+            <h5>Private Catering</h5>
+            <p>Experience Feane luxury at your home. We cater for small house parties with our top-tier service staff.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- contact section -->
+ <section class="contact_section layout_padding" style="background-color: #222831;">
+  <div class="container">
+    <div class="heading_container heading_center text-center mb-5 reveal fade-up">
+      <h2 class="text-white">Get In <span style="color: #ffbe33;">Touch</span></h2>
+      <p class="text-secondary">Have a question or planning an event? We'd love to hear from you.</p>
+    </div>
+
+    <div class="row">
+      {% if contact_info %}
+        {% with info=contact_info.first %}
+          <div class="col-md-4 mb-4 reveal " data-aos="fade-left">
+            <div class="contact_info_card">
+              <div class="icon_box">
+                <i class="fa fa-map-marker"></i>
+              </div>
+              <h5>Location</h5>
+              <p>{{ info.location }}</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 reveal " data-aos="fade-up">
+            <div class="contact_info_card">
+              <div class="icon_box">
+                <i class="fa fa-phone"></i>
+              </div>
+              <h5>Call Us</h5>
+              <p>{{ info.phone }}</p>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 reveal fade-right" data-aos="fade-right">
+            <div class="contact_info_card">
+              <div class="icon_box">
+                <i class="fa fa-envelope"></i>
+              </div>
+              <h5>Email Us</h5>
+              <p>{{ info.email }}</p>
+            </div>
+          </div>
+        {% endwith %}
+      {% else %}
+        <div class="col-12">
+          <p class="text-secondary text-center">Contact information is currently unavailable. Please check back later.</p>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="row mt-5 align-items-stretch">
+      <div class="col-md-6 mb-4 reveal fade-left" >
+        <div class="form_container h-100">
+  <form action="{% url 'about' %}" method="POST" class="contact-form-styled" >
+    {% csrf_token %}
+    
+    <div class="input-group-custom" data-aos="fade-right">
+      <label for="name"><i class="fa fa-user"></i> Full Name</label>
+      <input type="text" id="name" name="name" class="form-control-custom" placeholder="Enter your full name" required />
+    </div>
+
+    <div class="input-group-custom" data-aos="fade-up">
+      <label for="phone"><i class="fa fa-phone"></i> Phone Number</label>
+      <input type="text" id="phone" name="phone" class="form-control-custom" placeholder="Ex: +880 123456789..." required />
+    </div>
+
+    <div class="input-group-custom" data-aos="fade-up">
+      <label for="email"><i class="fa fa-envelope"></i> Email Address</label>
+      <input type="email" id="email" name="email" class="form-control-custom" placeholder="example@mail.com" required />
+    </div>
+
+    <div class="input-group-custom" data-aos="fade-up">
+      <label for="subject"><i class="fa fa-tag"></i> Subject</label>
+      <input type="text" id="subject" name="subject" class="form-control-custom" placeholder="Enter a subject" required "/>
+    </div>
+
+    <div class="input-group-custom" data-aos="fade-up">
+      <label for="message"><i class="fa fa-comments"></i> Your Message</label>
+      <textarea id="message" name="message" class="form-control-custom" placeholder="Tell us about your event or query..." rows="4" required></textarea>
+    </div>
+
+      <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="custom-toast animate-slide-in {{ message.tags }}">
+                            <div class="toast-content d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-info-circle mr-2"></i>
+                                    <span>{{ message }}</span>
+                                </div>
+                                <span class="close-toast-btn" onclick="removeToast(this)">&times;</span>
+                            </div>
+                            <div class="progress-bar"></div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+    <div class="btn_box mt-4" data-aos="fade-up">
+      <button type="submit" class="btn_custom w-100">
+        <i class="fa fa-paper-plane"></i> SEND MESSAGE
+      </button>
+    </div>
+  </form>
+</div>
+      </div>
+      
+      <div class="col-md-6 mb-4 reveal fade-right" data-aos="zoom-in">
+        <div class="map_container h-100">
+              <div class="map_container h-100">
+  {% if restaurant_info %}
+    {% with info=restaurant_info.first %}
+      <div class="map-responsive">
+      
+        {{ info.map_iframe|safe }}
+      </div>
+    {% endwith %}
+  {% else %}
+    <p class="text-secondary text-center p-5">Map information is currently unavailable. Please check back later.</p>
+  {% endif %}
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  </div>
+</section>
+{% endblock %}

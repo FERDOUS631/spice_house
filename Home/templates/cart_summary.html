@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    body { background-color: #1a1e23; } /* Deep Dark Background */
+    
+    .cart-container { 
+        background-color: #222831; 
+        color: #eeeeee; 
+        border-radius: 20px; 
+        padding: 40px; 
+        margin-top: 50px; 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .cart-header {
+        border-bottom: 2px solid #393e46;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+    }
+
+    .cart-item-row { 
+        border-bottom: 1px solid #393e46; 
+        padding: 25px 0; 
+        transition: all 0.3s ease;
+    }
+
+    .cart-item-row:hover {
+        background-color: #2d343e;
+        transform: scale(1.01);
+    }
+
+    .product-img {
+        width: 80px; 
+        height: 80px;
+        object-fit: cover;
+        border-radius: 12px; 
+        border: 2px solid #ffbe33;
+        transition: 0.3s;
+    }
+
+    .qty-box { 
+        background: #393e46; 
+        padding: 8px 18px; 
+        border-radius: 8px; 
+        font-weight: bold; 
+        color: #ffbe33; 
+        border: 1px solid #4e555f;
+    }
+
+    .btn-warning-custom { 
+        background-color: #ffbe33; 
+        color: #222831; 
+        font-weight: bold; 
+        border: none;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .btn-warning-custom:hover {
+        background-color: #e69c00;
+        transform: translateY(-2px);
+    }
+
+    /* Checkout Card Style */
+    .checkout-card {
+        background-color: #393e46;
+        border-radius: 15px;
+        padding: 25px;
+        position: sticky;
+        top: 20px;
+    }
+
+    .summary-line {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+    }
+
+    .btn-checkout {
+        background-color: #ffbe33;
+        color: #222831;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 15px;
+        border-radius: 10px;
+        width: 100%;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        transition: 0.4s;
+        margin-top: 20px;
+    }
+
+    .btn-checkout:hover {
+        background-color: #ffffff;
+        color: #222831;
+        box-shadow: 0 5px 15px rgba(255, 190, 51, 0.4);
+    }
+</style>
+
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="cart-container">
+                <div class="cart-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0" style="color: #ffbe33;"><i class="fa fa-shopping-basket"></i> Your Cart</h2>
+                    <span class="badge badge-pill badge-warning" style="font-size: 1rem;">{{ cart|length }} Items</span>
+                </div>
+                
+                <div id="cart-list">
+                    {% for item in cart_items %}
+                    <div class="row cart-item-row align-items-center" id="item-row-{{ item.product.id }}">
+                        <div class="col-md-2 text-center">
+                            <img src="{{ item.product.image.url }}" class="product-img">
+                        </div>
+                        <div class="col-md-3">
+                            <h5 class="mb-1">{{ item.product.name }}</h5>
+                            <small class="text-muted">Price: $<span id="price-{{ item.product.id }}">{{ item.product.price }}</span></small>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                                <button class="btn btn-sm btn-warning-custom update-cart" data-id="{{ item.product.id }}" data-todo="minus">-</button>
+                                <span class="mx-3 qty-box" id="qty-{{ item.product.id }}">{{ item.quantity }}</span>
+                                <button class="btn btn-sm btn-warning-custom update-cart" data-id="{{ item.product.id }}" data-todo="plus">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <strong style="color: #ffbe33; font-size: 1.1rem;">$<span id="subtotal-{{ item.product.id }}">{{ item.total_price }}</span></strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <button class="btn btn-outline-danger btn-sm delete-btn" data-id="{{ item.product.id }}" style="border-radius: 8px;">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div id="empty-msg" class="text-center py-5">
+                        <i class="fa fa-frown-o fa-4x mb-3 text-muted"></i>
+                        <h3>Your cart is empty!</h3>
+                        <a href="{% url 'menu' %}" class="btn btn-warning-custom mt-3">Go to Menu</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="cart-container checkout-card mt-lg-5">
+                <h3 class="mb-4" style="color: #ffbe33; border-bottom: 1px solid #4e555f; padding-bottom: 10px;">Order Summary</h3>
+                
+                <div class="summary-line">
+                    <span>Subtotal:</span>
+                    <span id="summary-subtotal">${{ total }}</span>
+                </div>
+                <div class="summary-line">
+                    <span>Delivery Fee:</span>
+                    <span class="text-success">FREE</span>
+                </div>
+                <hr style="border-top: 1px solid #4e555f;">
+                <div class="summary-line" style="font-weight: bold; font-size: 1.4rem;">
+                    <span>Total:</span>
+                    <span id="grand-total" style="color: #ffbe33;">${{ total }}</span>
+                </div>
+
+                <a href="{% url 'checkout' %}" class="btn-checkout">
+                    Proceed To Checkout <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+                
+                <div class="text-center mt-3">
+                    <img src="{{MEDIA_URL}}images/cheif.avif" class="img-fluid" style="width: 80%; opacity: 0.6;" alt="Payment Methods">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).on('click', '.update-cart', function (e) {
+        e.preventDefault();
+        let p_id = $(this).data('id');
+        let todo = $(this).data('todo');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_update" %}',
+            data: {
+                product_id: p_id,
+                todo: todo,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function (json) {
+                $('#qty-' + p_id).text(json.qty);
+                let price = parseFloat($('#price-' + p_id).text());
+                let newSubtotal = (price * json.qty).toFixed(2);
+                $('#subtotal-' + p_id).text(newSubtotal);
+                $('#grand-total').text('$' + json.total);
+                $('#summary-subtotal').text('$' + json.total);
+                $('#cart-qty').text(json.cart_count); 
+            }
+        });
+    });
+
+    $(document).on('click', '.delete-btn', function (e) {
+        e.preventDefault();
+        let p_id = $(this).data('id');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "cart_delete" %}',
+            data: {
+                product_id: p_id,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function (json) {
+                $('#item-row-' + p_id).fadeOut(300, function(){ $(this).remove(); });
+                $('#grand-total').text('$' + json.total);
+                $('#summary-subtotal').text('$' + json.total);
+                $('#cart-qty').text(json.cart_count);
+                if(json.cart_count == 0) location.reload();
+            }
+        });
+    });
+</script>
+{% endblock %}

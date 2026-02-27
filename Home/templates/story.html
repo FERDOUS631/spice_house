@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="journey-timeline py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title">Our Culinary Journey</h2>
+            <p class="text-muted">A timeline of passion, perseverance, and flavor.</p>
+        </div>
+        
+        <div class="timeline-wrap">
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="year">1995</div>
+                <div class="content">
+                    <h5>The Seed is Sown</h5>
+                    <p>Started as a small spice stall in a local market, blending secret family recipes for neighbors.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-left">
+                <div class="year">2005</div>
+                <div class="content">
+                    <h5>The First Kitchen</h5>
+                    <p>Opened our first 10-table diner, focusing on authentic clay-pot cooking and hand-ground spices.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-aos="fade-right">
+                <div class="year">2018</div>
+                <div class="content">
+                    <h5>Excellence Recognized</h5>
+                    <p>Awarded 'Best Authentic Spice House' in the region, serving over 500 guests daily.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="founder-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="zoom-in">
+                <div class="chef-img-box">
+                    <img src="{{ MEDIA_URL }}images/cheif.avif" class="img-fluid rounded shadow" alt="Founder">
+                    <div class="signature">John Spice</div>
+                </div>
+            </div>
+            <div class="col-lg-6 pl-lg-5" data-aos="fade-left">
+                <h6 class="text-warning text-uppercase font-weight-bold">The Soul Behind the Stove</h6>
+                <h2 class="section-title">A Message from Our Founder</h2>
+                <p class="text-muted font-italic">"I don't just sell food; I share my childhood memories. Every dish that leaves this kitchen carries a piece of my heritage. We chose the name 'Spice House' because, for us, spices are not just ingredients—they are the storytellers of our culture."</p>
+                <p class="text-dark font-weight-bold">— John Spice, Executive Chef & Founder</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials-section py-5 bg-dark text-white overflow-hidden">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="section-title text-white">Guest Chronicles</h2>
+            <p class="text-secondary">Kind words from our beloved spice lovers.</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="flip-left">
+                <div class="review-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p>"The aroma when you walk in is intoxicating. The slow-cooked lamb reminded me of my grandmother's cooking. Truly authentic!"</p>
+                    <div class="client-info mt-3 d-flex align-items-center">
+                        <img src="{{ MEDIA_URL }}images/client1.jpg" class="rounded-circle mr-3" width="50" height="50">
+                        <div>
+                            <h6 class="mb-0">Sarah Jenkins</h6>
+                            <small class="text-warning">Food Blogger</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="100">
+                <div class="review-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p>"You can actually taste the difference in the hand-ground spices. It’s not just heat; it’s a deep, complex flavor profile."</p>
+                    <div class="client-info mt-3 d-flex align-items-center">
+                        <img src="{{ MEDIA_URL }}images/client2.jpg" class="rounded-circle mr-3" width="50" height="50">
+                        <div>
+                            <h6 class="mb-0">Mark Thompson</h6>
+                            <small class="text-warning">Regular Guest</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
+                <div class="review-card">
+                    <div class="stars mb-2">★★★★★</div>
+                    <p>"Best service and most unique atmosphere. The 'Spice House' is our go-to place for every family celebration."</p>
+                    <div class="client-info mt-3 d-flex align-items-center">
+                        <img src="{{ MEDIA_URL }}images/cheif.avif" class="rounded-circle mr-3" width="50" height="50">
+                        <div>
+                            <h6 class="mb-0">Anita Roy</h6>
+                            <small class="text-warning">Culinary Critic</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+/* Timeline Styles */
+.timeline-wrap {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline-wrap::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: #ffbe33;
+    transform: translateX(-50%);
+}
+.timeline-item {
+    margin-bottom: 50px;
+    position: relative;
+    width: 50%;
+}
+.timeline-item:nth-child(odd) { float: left; padding-right: 40px; text-align: right; }
+.timeline-item:nth-child(even) { float: right; padding-left: 40px; text-align: left; }
+.year {
+    position: absolute;
+    top: 0;
+    background: #ffbe33;
+    color: #000;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+.timeline-item:nth-child(odd) .year { right: -65px; }
+.timeline-item:nth-child(even) .year { left: -65px; }
+.timeline-wrap::after { content: ""; display: table; clear: both; }
+
+/* Chef/Founder Styles */
+.chef-img-box { position: relative; }
+.signature {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Dancing Script', cursive; /* Use a handwriting font */
+    font-size: 2rem;
+    color: #ffbe33;
+    transform: rotate(-10deg);
+}
+
+/* Review Card Styles */
+.review-card {
+    background: rgba(255,255,255,0.05);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(255,190,51,0.2);
+    height: 100%;
+    transition: 0.3s;
+}
+.review-card:hover {
+    background: rgba(255,190,51,0.1);
+    transform: translateY(-10px);
+}
+.stars { color: #ffbe33; }
+</style>
+{% endblock %}

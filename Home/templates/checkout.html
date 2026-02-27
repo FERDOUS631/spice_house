@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .checkout-card { background: #222831; color: white; border-radius: 15px; padding: 30px; border: 1px solid #393e46; }
+    .pay-btn-box { border: 2px solid #393e46; border-radius: 10px; padding: 15px; cursor: pointer; transition: 0.3s; }
+    .pay-btn-box:hover, .active-pay { border-color: #ffbe33; background: #2d343e; }
+    input.form-control { background: #393e46; border: none; color: white; }
+</style>
+
+<div class="container py-5">
+    <form action="{% url 'place_order' %}" method="POST"> {% csrf_token %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="checkout-card" style="background: #222831; padding: 30px; border-radius: 15px; color: white;">
+                <h3 style="color: #ffbe33;">Delivery Details</h3>
+                <div class="mt-4">
+                    <input type="text" name="full_name" class="form-control mb-3" placeholder="Full Name" required>
+                    <input type="text" name="phone" class="form-control mb-3" placeholder="Phone Number" required>
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Email Address" required>
+                    <textarea name="address" class="form-control mb-3" placeholder="Full Address" rows="3" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="checkout-card" style="background: #222831; padding: 30px; border-radius: 15px; color: white;">
+                <h4 style="color: #ffbe33;">Payment Method</h4>
+                <div class="mt-3">
+                    <label class="pay-btn-box d-block mb-3">
+                        <input type="radio" name="payment_method" value="cod" checked> 
+                        <span class="ml-2">Cash on Delivery</span>
+                    </label>
+                    <label class="pay-btn-box d-block">
+                        <input type="radio" name="payment_method" value="online"> 
+                        <span class="ml-2">Online (bKash/Nagad/Card)</span>
+                    </label>
+                </div>
+                <hr style="background: #393e46;">
+                <div class="d-flex justify-content-between h4">
+                    <span>Total:</span>
+                    <span style="color: #ffbe33;">${{ total }}</span>
+                </div>
+                <button type="submit" class="btn btn-warning btn-block mt-4 py-3 font-weight-bold">CONFIRM ORDER</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+      <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="custom-toast animate-slide-in {{ message.tags }} alert alert-warning alert-dismissible fade show">
+                            <div class="toast-content d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-info-circle mr-2"></i>
+                                    <span>{{ message }}</span>
+                                </div>
+                                <span class="close-toast-btn" onclick="removeToast(this)">&times;</span>
+                            </div>
+                            <div class="progress-bar"></div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+</div>
+{% endblock %}

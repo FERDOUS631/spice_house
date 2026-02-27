@@ -1,0 +1,308 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="{{MEDIA_URL}}images/logo_SPICE.png" type="">
+
+  <title>{% block title %}{% endblock %} || Spice House</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!--owl slider stylesheet -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <!-- nice select  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <!-- font awesome style -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+  <!-- style.scss -->
+
+  <link rel="stylesheet" href="{% static 'css/min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.scss' %}">
+
+
+</head>
+
+<body>
+  
+    <!-- header section strats -->
+    <header class="header_section" style="background-color: black;position: fxed;width: 100%;z-index: 1000;">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+  
+          <a class="navbar-brand" href="{% url 'index' %}">
+            <span style="color:#ba5e0a;" data-aos="fade-right">
+              SPICE HOUSE
+            </span>
+          </a>
+       
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto ">
+              <li class="nav-item active" data-aos="fade-right">
+                  {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+                  {% else %}
+                    <a class="nav-link" href="{% url 'about' %}">Home <span class="sr-only">(current)</span></a>
+                  {% endif %}
+                </li>
+              <li class="nav-item" data-aos="fade-right">
+                <a class="nav-link" href="{% url 'menu' %}">Menu</a>
+              </li>
+              <li class="nav-item" data-aos="fade-right">
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+              </li>
+              <li class="nav-item" data-aos="fade-right">
+                <a class="nav-link" href="{% url 'book_table' %}">Book Table</a>
+              </li>
+            </ul>
+            <div class="user_option">
+       
+          <div class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle user_link" id="profileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-user" aria-hidden="true"></i>
+    </a>
+    
+    <div class="dropdown-menu dropdown-menu-right shadow-lg animate-fade-in" aria-labelledby="profileDropdown">
+        {% if user.is_authenticated %}
+            <div class="dropdown-header text-uppercase small text-muted">User Panel</div>
+            <a class="dropdown-item" href="{% url 'profile' %}">
+                <i class="fa fa-id-card-o mr-2"></i> Profile
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item logout-item" href="{% url 'logout' %}">
+                <i class="fa fa-sign-out mr-2"></i> Logout
+            </a>
+        {% else %}
+            <a class="dropdown-item" href="{% url 'login' %}">
+                <i class="fa fa-sign-in mr-2"></i> Login
+            </a>
+        {% endif %}
+    </div>
+</div>
+            <a class="cart_link" href="{% url 'cart_summary' %}" style="position: relative; display: inline-block;">
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="width: 30px; height: 30px; fill: #fff;" xml:space="preserve">
+        <g>
+            <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+            <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4C457.728,97.71,450.56,86.958,439.296,84.91z" />
+            <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+        </g>
+    </svg>
+
+    <span id="cart-qty" class="cart-badge">
+        {{ cart|length }}
+    </span>
+</a>
+            
+          
+                
+              <form class="form-inline">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+         
+
+              <a href="{% url 'menu' %}" class="order_online">
+                Order Online
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+  
+    <!-- end slider section -->
+
+
+    {% block content %}
+    {% endblock %}
+
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>
+              Contact Us
+            </h4>
+            <div class="contact_link_box">
+              {% if contact_info %}
+              {% with info=contact_info.first %}
+              <a href="{{ info.location_link }}" target="_blank">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                  {{ info.location }}
+                </span>
+              </a>
+              <a href="tel:{{ info.phone }}">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                  {{ info.phone }}
+                </span>
+              </a>
+              <a href="mailto:{{ info.email }}">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                  {{ info.email }}
+                </span>
+              </a>
+              {% endwith %}
+              {% else %}
+              <p class="text-muted">Contact information is currently unavailable.</p>
+              {% endif %}
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">
+              Spice House
+            </a>
+            <p>
+              Spice House is a best restaurant in town. We serve delicious food and provide excellent service to our customers. Visit us for an unforgettable dining experience.
+            </p>
+            <div class="footer_social">
+              {% if social_links %}
+              {% with links=social_links.first %}
+              <a href="{{ links.fb_link }}" target="_blank">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="{{ links.twitter_link }}" target="_blank">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="{{ links.linkedin_link }}" target="_blank">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="{{ links.instagram_link }}" target="_blank">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+              <a href="{{ links.printerest_link }}" target="_blank">
+                <i class="fa fa-pinterest" aria-hidden="true"></i>
+              </a>
+              {% endwith %}
+              {% else %}
+              <p class="text-muted">Social media links are currently unavailable.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>
+            Opening Hours
+          </h4>
+          <p>
+            Everyday
+          </p>
+          <p>
+            10.00 Am -10.00 Pm
+          </p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          <a href="#">Spice House</a><br><br>
+          &copy; <span id="displayYear"></span> Distributed By
+          <a href="#" target="_blank">WDFR</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+{% if discounts %}
+{% with discount=discounts.first %}
+<div id="burger-offer-card" class="burger-card-wrapper">
+    <div class="burger-card main-glass-card shadow-2xl">
+        <span class="close-burger-offer" onclick="hideBurgerOffer()">&times;</span>
+          <!-- addd image circle effect -->
+     <div class="burger-promo-box text-center ml-4 mr-4 mb-4">
+        <h2 class="mb-0">{{ discount.percentage }}%</h2>
+        <small>OFF</small>
+    </div>
+
+        <div class="burger-content d-flex align-items-center">
+        
+     {% if discount.image %}
+    <div class="burger-image-container m-auto" >
+        <div class="glow-ring"></div> <img src="{{ discount.image.url }}" alt="{{ discount.name }}" class="promo-img">
+    </div>
+            {% endif %}
+            <div class="burger-details ml-4">
+                <h4 class="gradient-text-gold mb-1">{{ discount.name }}</h4>
+                <p class="text-white mb-2">{{ discount.title }}</p>
+                {% if discount.code %}
+                <div class="d-flex align-items-center">
+                    <span class="promo-code mr-3">CODE: <strong class="text-info">{{ discount.code }}</strong></span>
+                    <a href="/shop/" class="btn-order-now">ORDER NOW</a>
+                </div>
+                {% endif %}
+                <!-- vaild date -->
+                <small class="text-muted d-block font-weight-bold mt-3">Valid from {{ discount.valid_from|date:"M d, Y" }} to {{ discount.valid_to|date:"M d, Y" }}</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endif %}
+
+  
+  <!-- footer section -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+    duration: 800,  
+    easing: 'ease-in-out',
+    once: true,    
+  });
+</script>
+
+
+  <!-- jQery -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="{% static 'js/bootstrap.js' %}"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="{% static 'js/custom.js' %}"></script>
+  <!-- Google Map -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+  </script>
+  <!-- End Google Map -->
+   <script src="{% static 'js/min.js' %}"></script>       
+</body>
+
+</html>

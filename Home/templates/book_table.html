@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Book A Table | Reserve Your Moment{% endblock %}
+
+{% block content %}
+<style>
+    /* Main Section Styling */
+    .book_section {
+        background-color: #fcfcfc;
+        padding: 90px 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Description Styling */
+    .heading_container h2 {
+        font-weight: 700;
+        color: #222;
+        position: relative;
+        padding-bottom: 15px;
+    }
+
+    .heading_container p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #666;
+    }
+
+    /* Left Side: Image & Info Box */
+    .img-box {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .img-box img {
+        width: 100%;
+        transition: transform 0.8s ease;
+    }
+
+    .img-box:hover img {
+        transform: scale(1.1);
+    }
+
+    .info_overlay {
+        background: #222;
+        color: #fff;
+        padding: 25px;
+    }
+
+    .info_overlay h5 {
+        color: #ffbe33;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    /* Right Side: Form Container */
+    .form_container {
+        background: #ffffff;
+        padding: 45px;
+        border-radius: 20px;
+        border-top: 8px solid #ffbe33;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    }
+
+    /* Form Inputs Styling */
+    .form-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #555 !important;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .form-control {
+        height: 52px;
+        background: #f9f9f9;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 10px 20px;
+        color: #f8f3f3 !important; 
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: #fff;
+        border-color: #ffbe33;
+        box-shadow: 0 5px 15px rgba(255, 190, 51, 0.15);
+        outline: none;
+    }
+
+    /* Dropdown Selection Text Color */
+    .custom-select {
+        color: #000 !important; 
+        cursor: pointer;
+    }
+
+    .custom-select option {
+        color: #000 !important;
+        background: #fff;
+    }
+
+    /* Textarea adjustment */
+    textarea.form-control {
+        height: auto !important;
+    }
+
+    /* Modern Button */
+    .btn-book {
+        background: #ffbe33;
+        color: #fff;
+        border: none;
+        height: 55px;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        width: 100%;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+    }
+
+    .btn-book:hover {
+        background: #e69c00;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(230, 156, 0, 0.3);
+    }
+
+    /* Success Message Styling */
+    .alert-custom {
+        border-radius: 12px;
+        border: none;
+        background-color: #d4edda;
+        color: #155724;
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+</style>
+
+<section class="book_section">
+  <div class="container">
+    
+    <div class="heading_container text-center mb-5" data-aos="fade-up">
+      <h2 class="display-4">Plan Your Perfect Event</h2>
+      <p class="col-md-8 mx-auto">
+        Join us for an exceptional dining experience. Whether it is a cozy dinner or a grand celebration, we ensure every detail is handled with care. Reserve your table today!
+      </p>
+    </div>
+
+    <div class="row align-items-stretch">
+      
+      <div class="col-md-5 mb-5 mb-md-0" data-aos="fade-right">
+        <div class="img-box h-100 d-flex flex-column">
+          <img src="{{MEDIA_URL}}images/resturant.avif" alt="Restaurant Interior" class="img-fluid flex-grow-1" style="object-fit: cover;">
+          
+          <div class="info_overlay">
+            <div class="row">
+                <div class="col-6">
+                    <h5><i class="fa fa-clock-o"></i> Hours</h5>
+                    <p class="small m-0">Daily: 10am - 11pm</p>
+                </div>
+                <div class="col-6 border-left border-secondary">
+                    <h5><i class="fa fa-map-marker"></i> Location</h5>
+
+                    {% if contact_info %}
+              {% with info=contact_info.first %}
+              <a href="{{ info.location_link }}" style="color: #fff;">
+                <span>
+                  {{ info.location }}
+                </span>
+              </a>
+              {% endwith %}
+              {% endif %}
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7" data-aos="fade-left">
+        <div class="form_container">
+          <h3 class="mb-4 font-weight-bold text-center">Reservation Details</h3>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-custom alert-dismissible fade show" role="alert">
+                <i class="fa fa-check-circle mr-2"></i> {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="POST">
+            {% csrf_token %}
+            
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Full Name</label>
+                <input type="text" name="name" class="form-control" placeholder="Enter your name" required />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" class="form-control" placeholder="example@mail.com" required />
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Phone Number</label>
+                <input type="text" name="phone" class="form-control" placeholder="+880..." required />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Total Guests</label>
+                <input type="number" name="persons" class="form-control" placeholder="How many people?" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>What is the Occasion?</label>
+              <select name="event_id" class="form-control custom-select" required>
+                <option value="" disabled selected>Select Event Type</option>
+                {% for event in event_types %}
+                  <option value="{{ event.id }}">{{ event.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Date</label>
+                <input type="date" name="date" class="form-control" required />
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Time</label>
+                <input type="time" name="time" class="form-control" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Additional Notes</label>
+              <textarea name="message" class="form-control" placeholder="Tell us if you have any special requests..." rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-book">
+               Confirm My Reservation
+            </button>
+          </form>
+          
+        </div>
+      </div>
+
+    </div>
+          <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="custom-toast animate-slide-in {{ message.tags }}">
+                            <div class="toast-content d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-info-circle mr-2"></i>
+                                    <span>{{ message }}</span>
+                                </div>
+                                <span class="close-toast-btn" onclick="removeToast(this)">&times;</span>
+                            </div>
+                            <div class="progress-bar"></div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+  </div>
+</section>
+{% endblock %}

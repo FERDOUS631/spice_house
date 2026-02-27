@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+<!-- home page -->
+{% block title %}Home{% endblock %}
+{% block content %}
+    <!-- end header section -->
+    <!-- slider section -->
+     <div class="hero_area" >
+    <div class="bg-box" >
+      <img src="{{ MEDIA_URL }}images/hero-bg.jpg" alt="Hero Background">
+    </div>
+  
+     <section class="slider_section ">
+      <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Fast Food Restaurant
+                    </h1>
+                    <p>
+                      Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                    </p>
+                    <div class="btn-box">
+                      <a href="" class="btn1">
+                        Order Now
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <ol class="carousel-indicators">
+            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+            <li data-target="#customCarousel1" data-slide-to="1"></li>
+            <li data-target="#customCarousel1" data-slide-to="2"></li>
+          </ol>
+        </div>
+      </div>
+
+    </section>
+    <!-- end slider section -->
+  </div>
+
+  <!-- offer section -->
+<section class="food_gallery_section">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2 class="gallery_title">Explore Our <span class="gold_text">Categories</span></h2>
+            <p class="gallery_subtitle">Pick your favorite category and savor the finest flavors.</p>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mt-2" data-aos="zoom-in">
+            {% for category in categories %}
+            <div class="col">
+                <div class="cat_box d-flex align-items-center flex-derection-column justify-space-between ">
+                    <div class="shine_effect"></div>
+                    
+                    <div class="img_wrapper">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        {% else %}
+                            <img src="images/default-food.png" alt="Default">
+                        {% endif %}
+                    </div>
+
+                    <div class="cat_detail">
+                        <h5>{{ category.name }}</h5>
+                       <a href="{% url 'menu' %}?filter={{ category.name|lower }}" class="view_link">
+                              View All <i class="fa fa-arrow-right ml-1"></i>
+                          </a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No categories found.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+  <!-- end offer section -->
+
+  <!-- why choose section -->
+<section class="features_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center mb-5">
+            <h2 class="section_title">Why <span class="gold_text">Choose Us?</span></h2>
+            <p class="section_subtitle">We provide the best service and quality food for our customers.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-right">
+                <div class="feature-box text-center">
+                    <div class="icon-box"><i class="fa fa-truck"></i></div>
+                    <h5>Fast Delivery</h5>
+                    <p>Your favorite meals delivered hot and fresh to your doorstep within 30 minutes.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="feature-box text-center">
+                    <div class="icon-box"><i class="fa fa-leaf"></i></div>
+                    <h5>Fresh Ingredients</h5>
+                    <p>We use only the highest quality, organic, and farm-fresh ingredients for every dish.</p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-left">
+                <div class="feature-box text-center">
+                    <div class="icon-box"><i class="fa fa-headphones"></i></div>
+                    <h5>24/7 Customer Support</h5>
+                    <p>Got a question? Our dedicated support team is available around the clock to assist you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <!-- end why choose section -->
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container  ">
+
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{{ MEDIA_URL }}images/about-img.png" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                We Are Feane
+              </h2>
+            </div>
+            <p>
+              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
+              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
+              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
+              the middle of text. All
+            </p>
+            <a href="">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end about section -->
+
+  <!-- book section -->
+ <section class="offer_section layout_padding-bottom py-5">
+  <div class="container text-center" data-aos="fade-up">
+    <div class="bg-dark p-5 rounded shadow">
+      <h2 class="text-white mb-3">A Quick Update for Our Guests</h2>
+     <div class="notice-container" data-aos="fade-down">
+  <div class="notice-card">
+    <div class="notice-icon">
+      <i class="fa fa-bullhorn pulse-icon"></i>
+    </div>
+    <div class="notice-content">
+      <span class="notice-label">Notice</span>
+      <p class="notice-text">
+        {{ settings.special_notice|default:"Book early to secure your spot for a delightful dining experience!" }}
+      </p>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="offer_section layout_padding-bottom py-5">
+  <div class="container text-center" data-aos="fade-up">
+    <div class="bg-dark p-5 rounded shadow position-relative overflow-hidden">
+      
+      <div style="position: absolute; top: -20px; right: -20px; opacity: 0.1; font-size: 10rem; color: white;">
+        <i class="fa fa-calendar-check-o"></i>
+      </div>
+
+      <h2 class="text-white mb-3">Planning a Special Event?</h2>
+      <p class="text-secondary mb-4">Reserve your table now to enjoy the best dining experience with your loved ones.</p>
+
+      <div class="row justify-content-center mb-4">
+        <div class="col-md-7">
+          
+          <div class="row mb-3 text-white">
+            <div class="col-4 border-right border-secondary">
+              <h4 class="mb-0 text-warning font-weight-bold">{{ total_tables|default:0 }}</h4>
+              <small class="text-uppercase text-muted" style="font-size: 0.65rem;">Total Capacity</small>
+            </div>
+            <div class="col-4 border-right border-secondary">
+              <h4 class="mb-0 text-success font-weight-bold">{{ available_tables|default:0 }}</h4>
+              <small class="text-uppercase text-muted" style="font-size: 0.65rem;">Available Now</small>
+            </div>
+            <div class="col-4">
+              <h4 class="mb-0 text-danger font-weight-bold">{{ booked_tables|default:0 }}</h4>
+              <small class="text-uppercase text-muted" style="font-size: 0.65rem;">Already Booked</small>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="text-white small">
+              <span class="live-pulse"></span> <strong>Live Status:</strong> Today
+            </span>
+            <span class="badge {% if available_tables < 5 %}badge-danger{% else %}badge-success{% endif %} px-3 py-2">
+              {% if available_tables <= 0 %}
+                Fully Booked
+              {% else %}
+                {{ available_tables }} Tables Left
+              {% endif %}
+            </span>
+            <!-- notice -->
+             
+          </div>
+          
+          <div class="progress" style="height: 12px; background-color: rgba(255,255,255,0.1); border-radius: 10px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" 
+                 role="progressbar" 
+                 {% if total_tables > 0 %}
+                    style="width: {% widthratio booked_tables total_tables 100 %}%"
+                 {% else %}
+                    style="width: 0%"
+                 {% endif %}>
+            </div>
+          </div>
+          
+          <p class="text-muted small mt-3 italic">
+            <i class="fa fa-clock-o"></i> Updated just now based on live reservations.
+          </p>
+        </div>
+      </div>
+
+      <a href="{% url 'book_table' %}" class="btn btn-warning px-5 py-3 font-weight-bold text-uppercase shadow-lg">
+        <i class="fa fa-plus-circle"></i> Book My Table Now
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- end book section -->
+
+  <!-- client section -->
+
+  <section class="client_section layout_padding-bottom">
+    <div class="container">
+      <div class="heading_container heading_center psudo_white_primary mb_45">
+        <h2>
+          What Says Our Customers
+        </h2>
+      </div>
+      <div class="carousel-wrap row ">
+        <div class="owl-carousel client_owl-carousel">
+          <div class="item">
+            <div class="box">
+              <div class="detail-box">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                </p>
+                <h6>
+                  Moana Michell
+                </h6>
+                <p>
+                  magna aliqua
+                </p>
+              </div>
+              <div class="img-box">
+                <img src="{{ MEDIA_URL }}images/client1.jpg" alt="" class="box-img">
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="box">
+              <div class="detail-box">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                </p>
+                <h6>
+                  Mike Hamell
+                </h6>
+                <p>
+                  magna aliqua
+                </p>
+              </div>
+              <div class="img-box">
+                <img src="{{ MEDIA_URL }}images/client2.jpg" alt="" class="box-img">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+
+  <!-- end client section -->
+
+ {% endblock %}

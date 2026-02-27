@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+
+
+
+{% block content %}
+<div style="background-color: black; width: 100%; height: 100vh;" class="log_wapper">
+  <!-- #use bootstrap     -->
+<div class="container text-center m-auto " 
+   style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), 
+                url('{{ MEDIA_URL }}images/f2.png'); 
+            background-size: cover; 
+            background-position: center;
+            height: 100vh; 
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;">
+         
+   
+       <div class="row">
+    <div class="col-lg-12 m-auto"> <div class="card mt-5 p-0 border-0 shadow-lg" style="background: #121212; border-radius: 15px; overflow: hidden;">
+            <div class="card-title mb-0">
+                <h3 class="text-white text-center py-4" 
+                    style="background: linear-gradient(45deg, #000000, #2c3e50); margin: 0; font-weight: bold; letter-spacing: 1px;">
+                    LOGIN
+                </h3>
+            </div>
+            
+            <div class="card-body p-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="text-secondary small">Email Address</label>
+                        <input type="email" name="email" class="form-control bg-dark text-white border-secondary" 
+                               placeholder="Enter Email" style="border-radius: 8px; padding: 12px;">
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="text-secondary small">Password</label>
+                        <input type="password" name="password" class="form-control bg-dark text-white border-secondary" 
+                               placeholder="Enter Password" style="border-radius: 8px; padding: 12px;">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 shadow" 
+                            style="background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%); border: none; font-weight: bold; border-radius: 8px;">
+                        LOGIN NOW
+                    </button>
+                </form>
+
+              <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+    {% if login_status %}
+        <div class="custom-toast animate-slide-in error-glow">
+            <div class="toast-content d-flex justify-content-between align-items-center">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-exclamation-circle mr-2"></i>
+                    <span>{{ login_status }}</span>
+                </div>
+                <span class="close-toast-btn" onclick="removeToast(this)">&times;</span>
+            </div>
+            <div class="progress-bar error-bar"></div>
+        </div>
+    {% endif %}
+</div>
+            </div>
+
+            <div class="card-footer border-0 pb-4" style="background: #121212;">
+                <p class="text-center text-secondary">
+                    Don't have an account? <a href="{% url 'register' %}" style="color: #00f2fe; text-decoration: none; font-weight: 500;">Create an account</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>  
+    
+</div>
+{% endblock %}
